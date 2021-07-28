@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Search Engine</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="MovieSearchEngine.js"></script>
+  <link rel="stylesheet" href="MovieSearchEngine.css">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div class="topnav">
+    <div style="display:flex;justify-content: center;">
+      <i class="fa fa-film logo" aria-hidden="true"></i>
+      <div class="logo">SEARCH MOVIES</div>
+    </div>
+    <div class="nav-container-wrapper">
+      <div class="navmenu-container">
+        <a class="active" href="MovieSearchEngine.html">Home</a>
+        <a href="aboutus.html">About</a>
+      </div>
+      <div class="search-container">
+        <input type="text" placeholder="Search.." name="search" id="searchKeyward">
+        <script>
+          var input = document.getElementById("searchKeyward");
+          input.addEventListener("keyup", function (event) {
+            console.log('enter');
+            if (event.keyCode === 13) {
+              event.preventDefault();
+              searchMovie();
+            }
+          });
+        </script>
+        <button onclick="searchMovie()" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div id="gridContainer">
+      <!-- data from ajex response -->
+      <div class='container gridRow1' id="gridRow1">
+        <div style="font-size: 60px;letter-spacing: 15px;color: #0000008a;word-spacing: 20px;">SEARCH TO SEE RESULTS
+        </div>
+      </div>
+      <div class='container gridRow2' id="gridRow2"></div>
+      <div class='container gridRow3' id="gridRow3"></div>
+    </div>
+  </div>
+  <div
+    style="text-align: center;background: transparent;backdrop-filter: blur(10px);display: flex;justify-content: center;"
+    class="containor">
+    <a id="Btnprv" class="previous" onclick="pageprv()">&laquo; Previous</a>
+    <a id="pagenum" class="pagenum">1</a>
+    <a id="Btnnext" class="next" onclick="pagenxt()">Next &raquo;</a>
+  </div>
+
+  <!-- MODEL POPUP WINDOW -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" title="Close" onclick="closeWindow()">&times;</span>
+      <div id="deatilSection">
+        <div class="deatilSection">
+          <div id="DetailPoster"></div>
+          <div class="Detailinfo">
+            <div class="texthover" style="padding-bottom: 5%;display: flex;flex-direction: column;align-items: center;">
+              <div id="DetailTitle"></div>
+              <div style="height: 1px;width: 80%;background: #e28c6e;box-shadow: 0px 0px 10px 1px #e28c6e;"></div>
+            </div>
+            <div class="DetailInfoContent">
+              <div class="texthover">
+                <div id="DetailYear"></div>
+              </div>
+              <div>
+                <div id="DetailimdbRating"></div>
+              </div>
+              <div class="texthover">
+                <div id="DetailGenre"></div>
+              </div>
+              <div>
+                <div id="DetailRated"></div>
+              </div>
+              <div>
+                <div id="DetailReleased"></div>
+              </div>
+              <div>
+                <div id="DetailLanguage"></div>
+              </div>
+              <div>
+                <div id="DetailDirector"></div>
+              </div>
+              <div>
+                <div id="DetailWriter"></div>
+              </div>
+              <div class="texthover">
+                <div id="DetailActors"></div>
+              </div>
+              <div>
+                <div id="DetailProduction"></div>
+              </div>
+            </div>
+            <div class="texthover" style="padding-top: 5%;display: flex;flex-direction: column;align-items: center;">
+              <div style="height: 1px;width: 80%;background: #e28c6e;box-shadow: 0px 0px 10px 1px #e28c6e;"></div>
+              <div id="DetailPlot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-distributed">
+
+    <div class="footer-right">
+      <a href="#"><i class="fa fa-github"></i></a>
+    </div>
+
+    <div class="footer-left">
+      <p class="footer-links">
+        <a class="link-1" href="#">Home</a>
+        <a>About</a>
+      </p>
+      <p>Movie Search Engine</p>
+    </div>
+
+  </footer>
+</body>
+
+</html>
