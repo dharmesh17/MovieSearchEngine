@@ -4,6 +4,9 @@ var pagenum = 1;
 
 $("#SearchButton").click(function (e) {
   e.preventDefault();
+  if (document.title == "About-Us") {
+    document.href = "./MovieSearchEngine.html";
+  }
   callApi(1);
   document.getElementById("pagenum").innerHTML = pagenum;
 });
@@ -18,7 +21,7 @@ function callApi(page) {
   console.log('callApi');
   $.ajax({
     type: "GET",
-    url: "http://www.omdbapi.com/?s=" + document.getElementById("searchKeyward").value + "&apikey=3173bd84" + "&page=" + page,
+    url: "https://www.omdbapi.com/?s=" + document.getElementById("searchKeyward").value + "&apikey=3173bd84" + "&page=" + page,
     success: function (result) {
       document.getElementById("gridRow1").innerHTML = "";
       document.getElementById("gridRow2").innerHTML = "";
@@ -70,9 +73,9 @@ function callApi(page) {
       }
 
       document.getElementById("gridRow3").innerHTML +=
-        "<div class='card desktop-only' style='background:transparent'>"+
+        "<div class='card desktop-only' style='background:transparent'>" +
         "</div>" +
-        "<div class='card desktop-only' style='background:transparent'>"+
+        "<div class='card desktop-only' style='background:transparent'>" +
         "</div>";
       searchData = result.Search;
       getDetails(0);
@@ -96,7 +99,7 @@ function getDetails(num) {
   console.log(searchData[num].Title);
   $.ajax({
     type: "GET",
-    url: "http://www.omdbapi.com/?t=" + searchData[num].Title + "&apikey=3173bd84",
+    url: "https://www.omdbapi.com/?t=" + searchData[num].Title + "&apikey=3173bd84",
 
     success: function (result) {
       var googlequery = 'location.href="https://www.google.com/search?q=+' + result.Title + '"'
