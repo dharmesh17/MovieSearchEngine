@@ -1,11 +1,24 @@
 'use strict';
-var searchData;
-var pagenum = 1;
+var searchData; //stores current search keyword response data.
+var pagenum = 1; //current page number used by frontend also used for API calls.
 
+// Pure Java Script Function for getting url parameters
+function getParameterByName(name, url = window.location.href) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+
+// Search bar functionality
 $("#SearchButton").click(function (e) {
-  e.preventDefault();
+  pagenum = 1;
   if (document.title == "About-Us") {
-    document.href = "./MovieSearchEngine.html";
+    document.location = "index.html?q=" + document.getElementById("searchKeyward").value;
+    return 0;
   }
   callApi(1);
   document.getElementById("pagenum").innerHTML = pagenum;
@@ -13,10 +26,19 @@ $("#SearchButton").click(function (e) {
 
 function searchMovie() {
   pagenum = 1;
+  if (document.title == "About-Us") {
+    document.location = "index.html?q=" + document.getElementById("searchKeyward").value;
+    return 0;
+  }
   callApi(1);
   document.getElementById("pagenum").innerHTML = pagenum;
 }
 
+
+/*
+main function that  calls the API
+Parse data to cards and also sets data to frontend using DOM.
+*/
 function callApi(page) {
   console.log('callApi');
   $.ajax({
@@ -72,6 +94,7 @@ function callApi(page) {
           "</div>"
       }
 
+      // Puts Extra cards on for desktop view to fix UI issue
       document.getElementById("gridRow3").innerHTML +=
         "<div class='card desktop-only' style='background:transparent'>" +
         "</div>" +
@@ -86,23 +109,45 @@ function callApi(page) {
   });
 }
 
+
+// Function that calls getDetails function and open model(popup window)
 function showinfo(num) {
   getDetails(num);
   document.getElementById("myModal").style.display = "block";
 }
 
+// function to close popup window
 function closeWindow() {
   document.getElementById("myModal").style.display = "none";
 }
 
+
+// calls API to get the info of a movie through title
 function getDetails(num) {
   console.log(searchData[num].Title);
+
+  // RESET old data
+  document.getElementById("DetailPoster").innerHTML = "";
+  document.getElementById("DetailTitle").innerHTML = "";
+  document.getElementById("DetailYear").innerHTML = "";
+  document.getElementById("DetailGenre").innerHTML = "";
+  document.getElementById("DetailRated").innerHTML = "";
+  document.getElementById("DetailReleased").innerHTML = "";
+  document.getElementById("DetailDirector").innerHTML = "";
+  document.getElementById("DetailWriter").innerHTML = "";
+  document.getElementById("DetailActors").innerHTML = "";
+  document.getElementById("DetailPlot").innerHTML = ""
+  document.getElementById("DetailLanguage").innerHTML = ""
+  document.getElementById("DetailimdbRating").innerHTML = "";
+  document.getElementById("DetailProduction").innerHTML = "";
+
   $.ajax({
     type: "GET",
     url: "https://www.omdbapi.com/?t=" + searchData[num].Title + "&apikey=3173bd84",
 
     success: function (result) {
-      var googlequery = 'location.href="https://www.google.com/search?q=+' + result.Title + '"'
+      var googlequery = 'location.href="https://www.google.com/search?q=+' + result.Title + '"';
+
       document.getElementById("DetailPoster").innerHTML = "<img height='100%' width='100%' class='imagedetail' src='" + isMissing(result.Poster) + "' onclick='" + googlequery + "'/>";
       document.getElementById("DetailTitle").innerHTML = "<span class='highlight'>" + isMissing(result.Title) + "</span>";
       document.getElementById("DetailYear").innerHTML = "<i class='fa fa-calendar' aria-hidden='true'></i>" + "<span class='highlight'>" + isMissing(result.Year) + "</span>";
@@ -124,16 +169,21 @@ function getDetails(num) {
 
 }
 
-function isMissing(string) {
 
+/*
+Replaces any data that is n/a or undefined to "-" to
+Avoid exception as well as show user '-' in frontend rather than 'undefined" or "n/a"
+*/
+function isMissing(string) {
   if (string.toLowerCase() == "n/a" || string.toLowerCase() == "undefined") {
     return "-";
   }
-
   return string;
 }
 
 
+
+// page functionality
 function pagenxt(e) {
   console.log('btnnext');
   pagenum += 1;
@@ -147,4 +197,4 @@ function pageprv(e) {
     callApi(pagenum);
     document.getElementById("pagenum").innerHTML = pagenum;
   }
-};
+};  
