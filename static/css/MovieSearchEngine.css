@@ -1,12 +1,63 @@
+:root {
+    --color1: #292c2fc4;
+    --color2: #ffffff80;
+}
+
 * {
     box-sizing: border-box;
     font-family: Roboto;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 30%;
+	}
+	30% {
+        background-position: 30% 50%;
+    }
+    50% {
+		background-position: 100% 50%;
+	}
+    80% {
+        background-position: 50% 30%;
+    }
+	100% {
+		background-position: 0% 30%;
+	}
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: linear-gradient(to bottom right, #805d79, #ad6e56, #8c7724);
+    background-image: linear-gradient( #805d79, #ad6e56, #8c7724);
+	background-size: 400% 400%;
+	animation: gradient 30s ease infinite;
+	height: 100vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    opacity: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--color1);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color2);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color1);
 }
 
 .fa {
@@ -37,37 +88,23 @@ body {
     overflow: hidden;
     position: fixed;
     z-index: 10;
-    background: linear-gradient(180deg, #292c2f 10%, transparent 100%);
+    background: var(--color1);
     backdrop-filter: blur(10px);
     width: 100%;
     top: 0px;
-}
-
-.topnav a {
-    float: left;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    border-radius: 10px;
-}
-
-.topnav a:hover {
-    background-color: #e28c6e;
-    color: black;
+    padding: 8px 0px;
+    border-bottom: solid var(--color2) 4px;
 }
 
 .topnav a.active {
-    background-color: #292c2fa1;
+    background-color: var(--color1);
     color: white;
 }
 
 .topnav .search-container {
-    background: #ffffff80;
+    background: var(--color2);
     backdrop-filter: blur(10px);
-    border-radius: 10px;
+    border-radius: 4px;
     float: right;
     width: 70%;
 }
@@ -75,15 +112,15 @@ body {
 .topnav input[type=text] {
     background: none;
     outline: none;
-    padding: 6px;
-    margin-top: 8px;
-    font-size: 17px;
+    font-size: 32px;
     border: none;
     width: 90%;
+    text-align: center;
+    text-transform: lowercase;
 }
 
 input:-internal-autofill-selected {
-    color: -internal-light-dark(black, #ffffff80) !important;
+    color: -internal-light-dark(black, var(--color2)) !important;
 }
 
 .topnav .search-container button {
@@ -105,19 +142,18 @@ input:-internal-autofill-selected {
 .logo {
     display: flex;
     align-items: center;
-    font-size: 40px;
+    font-size: 30px;
     color: #e28c6e;
-    padding: 20px 0px;
 }
 
 .nav-container-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 /* MAIN */
 .main {
-    padding-top: 150px;
+    padding-top: 80px;
 }
 
 .container {
@@ -152,7 +188,7 @@ input:-internal-autofill-selected {
 .card {
     width: 300px;
     margin: 30px;
-    background: #808080;
+    background: var(--color2);
     background-size: 300px !important;
     border-radius: 10px;
     transition: background 0.8s;
@@ -207,7 +243,7 @@ a:hover {
 .previous {
     background-color: #e27b5790;
     backdrop-filter: blur(30px);
-    color: black;
+    color: white;
     width: 10%;
     cursor: pointer;
 }
@@ -215,15 +251,22 @@ a:hover {
 .next {
     background-color: #e27b5790;
     backdrop-filter: blur(30px);
-    color: black;
+    color: white;
     width: 10%;
     cursor: pointer;
+}
+.pageingnation {
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    z-index: 10;
+    width:100%;
 }
 
 .pagenum {
     border-radius: 1%;
     color: rgb(255, 255, 255);
-    background-color: #292c2fc4;
+    background-color: var(--color1);
     backdrop-filter: blur(10px);
     width: 5%;
     border: 2px solid #ffffffbf;
@@ -259,25 +302,29 @@ a:hover {
 /* Modal Content/Box */
 .modal-content {
     background-color: #98989880;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(18px);
     position: fixed;
     margin: 10%;
     /* 15% from the top and centered */
     padding: 20px;
-    border: 10px solid #0000004f;
-    border-radius: 10px;
+    border: 8px solid var(--color1);
+    border-radius: 8px;
     width: 80%;
     /* Could be more or less, depending on screen size */
 }
 
+.imagedetail {
+    margin: 0;
+}
+
 /* The Close Button */
 .close {
-    color: #675f5c;
+    color: var(--color1);
     float: right;
     font-size: 60px;
     font-weight: bold;
     position: absolute;
-    top: -20px;
+    top: -15px;
     left: 97%;
 }
 
@@ -338,20 +385,19 @@ a:hover {
 
 
 .footer-distributed {
-    background-color: #292c2fc4;
+    background-color: var(--color1);
     backdrop-filter: blur(10px);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
     text-align: left;
     font: normal 16px sans-serif;
-    padding: 45px 50px;
 }
 
 .footer-distributed .footer-left p {
     color: #8f9296;
     font-size: 14px;
-    margin: 0;
+    margin: 0px 15px;
 }
 
 /* Footer links */
@@ -363,6 +409,8 @@ a:hover {
     margin: 0 0 10px;
     padding: 0;
     transition: ease .25s;
+    display: flex;
+    flex-direction: column;
 }
 
 .footer-distributed p.footer-links a {
@@ -373,7 +421,7 @@ a:hover {
     transition: ease .25s;
 }
 
-.footer-distributed p.footer-links a:hover { 
+.footer-distributed p.footer-links a:hover {
     color: black;
     background-color: white;
 }
@@ -441,7 +489,7 @@ a:hover {
         margin-top: 20%;
         width: 90%;
         padding: 10px;
-        border: 5px solid #0000004f;
+        border: 5px solid var(--color1);
     }
 
     .deatilSection {
@@ -457,7 +505,7 @@ a:hover {
         padding-top: 200px;
     }
 
-    .desktop-only{
+    .desktop-only {
         display: none !important;
     }
 
@@ -465,10 +513,6 @@ a:hover {
         display: grid;
         grid-template-columns: 1fr 1fr;
         justify-items: center;
-    }
-
-    .logo {
-        font-size: 40px;
     }
 
     .navmenu-container {
@@ -479,7 +523,6 @@ a:hover {
     }
 
     .topnav a {
-        width: 50%;
         padding: 14px 16px;
         margin: 2%;
         font-size: 20px;
@@ -502,8 +545,6 @@ a:hover {
     }
 
     .topnav input[type=text] {
-        padding: 0px 10px;
-        font-size: 20px;
         width: 85%;
     }
 
@@ -512,7 +553,7 @@ a:hover {
         width: 150px;
         height: 250px;
         margin: 10px;
-        background: #808080;
+        background: var(--color2);
         background-size: 180px !important;
         border-radius: 10px;
         transition: background 0.8s;
@@ -546,7 +587,6 @@ a:hover {
         display: grid;
         grid-template-columns: 1fr;
     }
-
 
     .previous {
         width: 35%;

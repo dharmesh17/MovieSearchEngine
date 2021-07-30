@@ -1,0 +1,10 @@
+{
+    "name":"MovieSearhEngine",
+    "short_name": "MovieSearhEngine",
+    "start_url": "/MovieSearchEngine/?home=true",
+    "icon": [],
+    "theme_color": "#292c2fc4",
+    "background_color": "#ad6e56",
+    "display": "fullscreen",
+    "orientation":"any"
+}
